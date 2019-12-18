@@ -26,6 +26,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "devDependencies": {
+    "@types/socket.io-client": "1.4.32",
     "gulp": "^4.0.0",
     "gulp-bump": "^2.8.0",
     "gulp-git": "^2.2.0",
@@ -47,5 +48,8 @@
     "featureRelease": "npm install && gulp featureRelease",
     "majorRelease": "npm install && gulp majorRelease",
     "preRelease": "npm install && gulp preRelease"
+  },
+  "dependencies": {
+    "socket.io-client": "2.3.0"
   }
 }
