@@ -28,19 +28,15 @@ export class RecognizerConfig {
                 console.log("blob size....",blob);
 
                 this.stream = ss.createStream();
-
-                console.log("stream...",this.stream)
-
-                resolve("data.text")
-                // ss(this.socket, {}).emit("audio", stream);
-                // ss.createBlobReadStream(blob, {}).pipe(stream);
-                // ss(this.socket, {}).on("sttresult", (data: any) => {
-                //   if (data.err) {
-                //     reject("Issue at DeepSpeech side");
-                //   } else {
-                //     resolve(data.text);
-                //   }
-                // });
+                ss(this.socket).emit("audio", this.stream);
+                ss.createBlobReadStream(blob).pipe(this.stream);
+                ss(this.socket).on("sttresult", (data: any) => {
+                  if (data.err) {
+                    reject("Issue at DeepSpeech side");
+                  } else {
+                    resolve(data.text);
+                  }
+                });
               });
             } catch (err) {
               reject(err);
