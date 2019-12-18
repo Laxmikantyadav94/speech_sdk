@@ -25,17 +25,22 @@ export class RecognizerConfig {
         return new Promise((resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
               this.recorder.stop((blob: any) => {
-                console.log("blob size....",blob)
-                const stream = ss.createStream({});
-                ss(this.socket, {}).emit("audio", stream);
-                ss.createBlobReadStream(blob, {}).pipe(stream);
-                ss(this.socket, {}).on("sttresult", (data: any) => {
-                  if (data.err) {
-                    reject("Issue at DeepSpeech side");
-                  } else {
-                    resolve(data.text);
-                  }
-                });
+                console.log("blob size....",blob);
+
+                this.stream = ss.createStream();
+
+                console.log("stream...",this.stream)
+
+                resolve("data.text")
+                // ss(this.socket, {}).emit("audio", stream);
+                // ss.createBlobReadStream(blob, {}).pipe(stream);
+                // ss(this.socket, {}).on("sttresult", (data: any) => {
+                //   if (data.err) {
+                //     reject("Issue at DeepSpeech side");
+                //   } else {
+                //     resolve(data.text);
+                //   }
+                // });
               });
             } catch (err) {
               reject(err);
