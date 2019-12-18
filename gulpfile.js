@@ -8,18 +8,36 @@ var versionBump = require('gulp-bump')
 var tagVersion = require('gulp-tag-version');
 var webpack = require('webpack-stream');
 
+// gulp.task("build_ES5", function() {
+//     return gulp.src([
+//             "src/**/*.ts",
+//             "Speech.Browser.Sdk.ts"],
+//             {base: '.'})
+//         .pipe(tslint({
+//       formatter: "prose",
+//             configuration: "tslint.json"
+//     }))
+//     .pipe(tslint.report({
+//             summarizeFailureOutput: true
+//         }))
+//         .pipe(sourcemaps.init())
+//         .pipe(ts({
+//             target: "ES5",
+//             lib: [ "ES2015", "dom" ],
+//             declaration: true,
+//             noImplicitAny: true,
+//             removeComments: false,
+//             outDir: 'distrib'
+//         }))
+//         .pipe(sourcemaps.write('.'))
+//         .pipe(gulp.dest('distrib'));
+// });
+
 gulp.task("build_ES5", function() {
     return gulp.src([
             "src/**/*.ts",
             "Speech.Browser.Sdk.ts"],
             {base: '.'})
-        .pipe(tslint({
-      formatter: "prose",
-            configuration: "tslint.json"
-    }))
-    .pipe(tslint.report({
-            summarizeFailureOutput: true
-        }))
         .pipe(sourcemaps.init())
         .pipe(ts({
             target: "ES5",
@@ -32,7 +50,6 @@ gulp.task("build_ES5", function() {
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('distrib'));
 });
-
 
 gulp.task("build", gulp.series("build_ES5"));
 

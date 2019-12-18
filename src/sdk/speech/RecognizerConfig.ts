@@ -18,12 +18,14 @@ export class RecognizerConfig {
 
     public recordAudio(): void {
         this.recorder.record();
+        console.log("recordnign started")
     }
 
     public stopAudio(): Promise<any> {
         return new Promise((resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
               this.recorder.stop((blob: any) => {
+                console.log("blob size....",blob)
                 const stream = ss.createStream({});
                 ss(this.socket, {}).emit("audio", stream);
                 ss.createBlobReadStream(blob, {}).pipe(stream);
