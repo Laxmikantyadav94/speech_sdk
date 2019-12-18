@@ -38,7 +38,7 @@ gulp.task("build", gulp.series("build_ES5"));
 gulp.task("bundle", gulp.series("build_ES5", function () {
     return gulp.src('samples/browser/sample_app.js')
     .pipe(webpack({
-        output: {filename: 'speech.sdk.bundle.js'},
+        output: {filename: 'speech.sdk.bundle.js'}, 
         devtool: 'source-map',
         module:  {
             rules: [{
