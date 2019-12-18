@@ -17,7 +17,6 @@ export class RecognizerConfig {
     }
 
     public recordAudio(): void {
-        this.recorder.clear();
         this.recorder.record();
     }
 
