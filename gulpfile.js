@@ -23,6 +23,7 @@ gulp.task("build_ES5", function() {
         .pipe(sourcemaps.init())
         .pipe(ts({
             target: "ES5",
+            lib: [ "ES2015", "dom" ],
             declaration: true,
             noImplicitAny: true,
             removeComments: false,
