@@ -24,8 +24,7 @@ var webpack = require('webpack-stream');
 //         .pipe(ts({
 //             target: "ES5",
 //             lib: [ "ES2015", "dom" ],
-//             declaration: true,
-//             noImplicitAny: true,
+//             allowJs: true,
 //             removeComments: false,
 //             outDir: 'distrib'
 //         }))
@@ -33,6 +32,8 @@ var webpack = require('webpack-stream');
 //         .pipe(gulp.dest('distrib'));
 // });
 
+// noImplicitAny: true,
+// declaration: true,
 gulp.task("build_ES5", function() {
     return gulp.src([
             "src/**/*.ts",

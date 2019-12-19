@@ -1,8 +1,7 @@
 import * as RecordRTC from "recordrtc";
 import * as io from "socket.io-client";
-import * as ss from '../js/socket.io-stream';
-// const path = require('path');
-//declare var ss: any;
+import * as ss from "../js/socket.io-stream";
+const path = require("path");
 
 export class RecognizerConfig {
     protected socket: any;
@@ -12,10 +11,9 @@ export class RecognizerConfig {
     public async ioConnect(): Promise<any> {
         return new Promise(async (resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
+                 console.log("path...", path.resolve(__dirname, "../js/socket.io-stream"));
                 this.socket = io.connect("http://192.168.50.86:3000");
                 this.stream = await this.getMedia();
-                // await this.socketStream();
-                console.log("stream....",this.stream);
                 this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
                         mimeType: "audio/wav",
                         type: "audio",
@@ -35,7 +33,6 @@ export class RecognizerConfig {
         return new Promise((resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
               this.recorder.stop((blob: any) => {
-                  console.log("blob...",blob);
                 this.stream = ss.createStream();
                 ss(this.socket).emit("audio", this.stream);
                 ss.createBlobReadStream(blob).pipe(this.stream);
@@ -63,29 +60,4 @@ export class RecognizerConfig {
             throw err;
         }
     }
-
-//     private socketStream(): Promise<any>{
-//          return new Promise((resolve, reject) => {
-//            try {
-//             // let pathScript = path.resolve(__dirname, '../js/socket.io-stream.js');
-//              this.loadScript('../js/socket.io-stream.js',() => {
-//                 console.log('recorderJS loaded');
-//                resolve();
-//              });
-//            } catch (err) {
-//              reject(err);
-//            }
-//          });
-//     }
-
-//     private loadScript(url: any, execFn : any) : void {
-//         const script = document.createElement('script');
-//         script.type = 'text/javascript';
-//         script.src = url;
-//         // script.async = sync ? sync : 'async';
-//         if (execFn) {
-//           script.onload = execFn;
-//         }
-//         document.getElementsByTagName('head')[0].appendChild(script);
-//       }
 }
