@@ -33,8 +33,9 @@ export class RecognizerConfig {
             try {
               this.recorder.stop((blob: any) => {
                   console.log("blob...",blob);
-                  resolve();
-                // this.stream = ss.createStream();
+                this.stream = ss.createStream();
+                resolve();
+
                 // ss(this.socket).emit("audio", this.stream);
                 // ss.createBlobReadStream(blob).pipe(this.stream);
                 // ss(this.socket).on("sttresult", (stream: any , data: any) => {
