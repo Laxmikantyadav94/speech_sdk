@@ -39,7 +39,8 @@ export class RecognizerConfig {
                 ss(this.socket).emit("audio", this.stream);
                 ss.createBlobReadStream(blob).pipe(this.stream);
                 console.log("testing...")
-                ss(this.socket).on("sttresult", (data: any) => {
+                ss(this.socket).on("sttresult", (stream:any ,data: any) => {
+                    console.log("stt rerult stream....",stream);
                     console.log("stt rerult....",data);
                   if (data.err) {
                     reject("Issue at DeepSpeech side");
