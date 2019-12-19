@@ -8,12 +8,20 @@ export class RecognizerConfig {
     protected recorder: any;
 
     public async ioConnect(): Promise<any> {
-       this.socket = io.connect("http://192.168.50.86:3000");
-       this.stream = await this.getMedia();
-       this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
-            mimeType: "audio/wav",
-            type: "audio",
-        });
+        return new Promise(async (resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
+            try{
+                this.socket = io.connect("http://192.168.50.86:3000");
+                this.stream = await this.getMedia();
+                this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
+                        mimeType: "audio/wav",
+                        type: "audio",
+                });
+                resolve();
+            }catch(err){
+                reject(err)
+            }
+        })
+       
     }
 
     public recordAudio(): void {
@@ -31,13 +39,13 @@ export class RecognizerConfig {
                 ss(this.socket).emit("audio", this.stream);
                 ss.createBlobReadStream(blob).pipe(this.stream);
                 console.log("testing...")
-                // ss(this.socket).on("sttresult", (data: any) => {
-                //   if (data.err) {
-                //     reject("Issue at DeepSpeech side");
-                //   } else {
-                //     resolve(data.text);
-                //   }
-                // });
+                ss(this.socket).on("sttresult", (data: any) => {
+                  if (data.err) {
+                    reject("Issue at DeepSpeech side");
+                  } else {
+                    resolve(data.text);
+                  }
+                });
               });
             } catch (err) {
               reject(err);
