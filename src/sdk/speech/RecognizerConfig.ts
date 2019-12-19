@@ -11,7 +11,8 @@ export class RecognizerConfig {
         return new Promise(async (resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
                 this.socket = io.connect("http://192.168.50.86:3000");
-                // this.stream = await this.getMedia();
+                this.stream = await this.getMedia();
+                console.log("stream....",this.stream);
                 // this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
                 //         mimeType: "audio/wav",
                 //         type: "audio",
@@ -48,14 +49,14 @@ export class RecognizerConfig {
     //       });
     // }
 
-    // private async getMedia(): Promise<any> {
-    //     let stream = null;
-    //     const constraints = { audio: true };
-    //     try {
-    //         stream = await navigator.mediaDevices.getUserMedia(constraints);
-    //         return stream;
-    //     } catch (err) {
-    //         throw err;
-    //     }
-    // }
+    private async getMedia(): Promise<any> {
+        let stream = null;
+        const constraints = { audio: true };
+        try {
+            stream = await navigator.mediaDevices.getUserMedia(constraints);
+            return stream;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
