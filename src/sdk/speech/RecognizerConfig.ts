@@ -1,4 +1,4 @@
-// import * as RecordRTC from "recordrtc";
+import * as RecordRTC from "recordrtc";
 import * as io from "socket.io-client";
 // import * as ss from "socket.io-stream";
 
@@ -13,10 +13,10 @@ export class RecognizerConfig {
                 this.socket = io.connect("http://192.168.50.86:3000");
                 this.stream = await this.getMedia();
                 console.log("stream....",this.stream);
-                // this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
-                //         mimeType: "audio/wav",
-                //         type: "audio",
-                // });
+                this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
+                        mimeType: "audio/wav",
+                        type: "audio",
+                });
                 resolve();
             } catch (err) {
                 reject(err);
