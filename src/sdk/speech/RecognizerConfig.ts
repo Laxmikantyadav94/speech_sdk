@@ -37,17 +37,15 @@ export class RecognizerConfig {
               this.recorder.stop((blob: any) => {
                   console.log("blob...",blob);
                 this.stream = ss.createStream();
-                resolve();
-
-                // ss(this.socket).emit("audio", this.stream);
-                // ss.createBlobReadStream(blob).pipe(this.stream);
-                // ss(this.socket).on("sttresult", (stream: any , data: any) => {
-                //   if (!stream || data.err) {
-                //     reject("Issue at DeepSpeech side");
-                //   } else {
-                //     resolve(data.text);
-                //   }
-               // });
+                ss(this.socket).emit("audio", this.stream);
+                ss.createBlobReadStream(blob).pipe(this.stream);
+                ss(this.socket).on("sttresult", (stream: any , data: any) => {
+                  if (!stream || data.err) {
+                    reject("Issue at DeepSpeech side");
+                  } else {
+                    resolve(data.text);
+                  }
+               });
               });
             } catch (err) {
               reject(err);

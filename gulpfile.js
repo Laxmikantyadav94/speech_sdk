@@ -36,14 +36,15 @@ var webpack = require('webpack-stream');
 gulp.task("build_ES5", function() {
     return gulp.src([
             "src/**/*.ts",
+            "src/**/*.js",
             "Speech.Browser.Sdk.ts"],
             {base: '.'})
         .pipe(sourcemaps.init())
         .pipe(ts({
             target: "ES5",
             lib: [ "ES2015", "dom" ],
-            declaration: true,
             removeComments: false,
+            allowJs: true,
             outDir: 'distrib'
         }))
         .pipe(sourcemaps.write('.'))
