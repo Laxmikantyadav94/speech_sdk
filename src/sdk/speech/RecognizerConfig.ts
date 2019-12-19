@@ -24,30 +24,32 @@ export class RecognizerConfig {
         });
     }
 
-    // public recordAudio(): void {
-    //     this.recorder.record();
-    // }
+    public recordAudio(): void {
+        this.recorder.record();
+    }
 
-    // public stopAudio(): Promise<any> {
-    //     return new Promise((resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
-    //         try {
-    //           this.recorder.stop((blob: any) => {
-    //             this.stream = ss.createStream();
-    //             ss(this.socket).emit("audio", this.stream);
-    //             ss.createBlobReadStream(blob).pipe(this.stream);
-    //             ss(this.socket).on("sttresult", (stream: any , data: any) => {
-    //               if (!stream || data.err) {
-    //                 reject("Issue at DeepSpeech side");
-    //               } else {
-    //                 resolve(data.text);
-    //               }
-    //             });
-    //           });
-    //         } catch (err) {
-    //           reject(err);
-    //         }
-    //       });
-    // }
+    public stopAudio(): Promise<any> {
+        return new Promise((resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
+            try {
+              this.recorder.stop((blob: any) => {
+                  console.log("blob...",blob);
+                  resolve();
+                // this.stream = ss.createStream();
+                // ss(this.socket).emit("audio", this.stream);
+                // ss.createBlobReadStream(blob).pipe(this.stream);
+                // ss(this.socket).on("sttresult", (stream: any , data: any) => {
+                //   if (!stream || data.err) {
+                //     reject("Issue at DeepSpeech side");
+                //   } else {
+                //     resolve(data.text);
+                //   }
+               // });
+              });
+            } catch (err) {
+              reject(err);
+            }
+          });
+    }
 
     private async getMedia(): Promise<any> {
         let stream = null;
