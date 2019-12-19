@@ -1,6 +1,8 @@
 import * as RecordRTC from "recordrtc";
 import * as io from "socket.io-client";
-import * as ss from "socket.io-stream";
+import * as ss from '../js/socket.io-stream';
+// const path = require('path');
+//declare var ss: any;
 
 export class RecognizerConfig {
     protected socket: any;
@@ -12,6 +14,7 @@ export class RecognizerConfig {
             try {
                 this.socket = io.connect("http://192.168.50.86:3000");
                 this.stream = await this.getMedia();
+                // await this.socketStream();
                 console.log("stream....",this.stream);
                 this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
                         mimeType: "audio/wav",
@@ -62,4 +65,29 @@ export class RecognizerConfig {
             throw err;
         }
     }
+
+//     private socketStream(): Promise<any>{
+//          return new Promise((resolve, reject) => {
+//            try {
+//             // let pathScript = path.resolve(__dirname, '../js/socket.io-stream.js');
+//              this.loadScript('../js/socket.io-stream.js',() => {
+//                 console.log('recorderJS loaded');
+//                resolve();
+//              });
+//            } catch (err) {
+//              reject(err);
+//            }
+//          });
+//     }
+
+//     private loadScript(url: any, execFn : any) : void {
+//         const script = document.createElement('script');
+//         script.type = 'text/javascript';
+//         script.src = url;
+//         // script.async = sync ? sync : 'async';
+//         if (execFn) {
+//           script.onload = execFn;
+//         }
+//         document.getElementsByTagName('head')[0].appendChild(script);
+//       }
 }
