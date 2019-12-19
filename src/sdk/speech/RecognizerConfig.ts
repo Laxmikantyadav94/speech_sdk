@@ -1,6 +1,6 @@
 import * as RecordRTC from "recordrtc";
 import * as io from "socket.io-client";
-// import * as ss from "socket.io-stream";
+import * as ss from "socket.io-stream";
 
 export class RecognizerConfig {
     protected socket: any;

@@ -1,6 +1,6 @@
 {
   "name": "azure_sdk_test",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Microsoft Speech SDK for browsers",
   "main": "distrib/Speech.Browser.Sdk.js",
   "types": "distrib/speech.browser.sdk.d.ts",
@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "socket.io-client": "2.3.0",
-    "recordrtc": "5.5.8"
+    "recordrtc": "5.5.8",
+    "socket.io-stream": "0.9.1"
   }
 }
