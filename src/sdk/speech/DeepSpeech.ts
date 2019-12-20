@@ -1,17 +1,15 @@
 import * as RecordRTC from "recordrtc";
 import * as io from "socket.io-client";
 import * as ss from "../js/socket.io-stream";
-const path = require("path");
 
-export class RecognizerConfig {
+export class DeepSpeech {
     protected socket: any;
     protected stream: any;
     protected recorder: any;
 
-    public async ioConnect(): Promise<any> {
+    public async init(): Promise<any> {
         return new Promise(async (resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
-                 console.log("path...", path.resolve(__dirname, "../js/socket.io-stream"));
                 this.socket = io.connect("http://192.168.50.86:3000");
                 this.stream = await this.getMedia();
                 this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {

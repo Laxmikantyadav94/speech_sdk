@@ -1,4 +1,4 @@
 
 // IMPORTANT - Dont publish internal modules.
 
-export * from "./RecognizerConfig";
+export * from "./DeepSpeech";

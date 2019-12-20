@@ -1,11 +1,11 @@
 {
-  "name": "azure_sdk_test",
-  "version": "0.2.6",
-  "description": "Microsoft Speech SDK for browsers",
+  "name": "speech-sdk",
+  "version": "0.0.1",
+  "description": "Smartek21 Speech SDK for browsers",
   "main": "distrib/Speech.Browser.Sdk.js",
   "types": "distrib/speech.browser.sdk.d.ts",
   "keywords": [
-    "microsoft",
+    "smartek21",
     "speech",
     "sdk",
     "javascript",
@@ -13,7 +13,7 @@
     "ts",
     "js",
     "browser",
-    "websocket",
+    "socket-io",
     "speechtotext"
   ],
   "bugs": {
@@ -23,10 +23,9 @@
     "type": "git",
     "url": "https://github.com/Azure-Samples/SpeechToText-WebSockets-Javascript.git"
   },
-  "author": "Microsoft",
+  "author": "smartek21",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "12.12.21",
     "@types/socket.io-client": "1.4.32",
     "gulp": "^4.0.0",
     "gulp-bump": "^2.8.0",
