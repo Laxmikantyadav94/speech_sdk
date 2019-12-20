@@ -8,49 +8,50 @@ var versionBump = require('gulp-bump')
 var tagVersion = require('gulp-tag-version');
 var webpack = require('webpack-stream');
 
-gulp.task("build_ES5", function() {
-    return gulp.src([
-            "src/**/*.ts",
-            "Speech.Browser.Sdk.ts"],
-            {base: '.'})
-        .pipe(tslint({
-      formatter: "prose",
-            configuration: "tslint.json"
-    }))
-    .pipe(tslint.report({
-            summarizeFailureOutput: true
-        }))
-        .pipe(sourcemaps.init())
-        .pipe(ts({
-            target: "ES5",
-            lib: [ "ES2015", "dom" ],
-            allowJs: true,
-            removeComments: false,
-            outDir: 'distrib'
-        }))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('distrib'));
-});
-
-// noImplicitAny: true,
-// // declaration: true,
 // gulp.task("build_ES5", function() {
 //     return gulp.src([
 //             "src/**/*.ts",
-//             "src/**/*.js",
 //             "Speech.Browser.Sdk.ts"],
 //             {base: '.'})
+//         .pipe(tslint({
+//       formatter: "prose",
+//             configuration: "tslint.json"
+//     }))
+//     .pipe(tslint.report({
+//             summarizeFailureOutput: true
+//         }))
 //         .pipe(sourcemaps.init())
 //         .pipe(ts({
 //             target: "ES5",
 //             lib: [ "ES2015", "dom" ],
-//             removeComments: false,
 //             allowJs: true,
+//             removeComments: false,
 //             outDir: 'distrib'
 //         }))
 //         .pipe(sourcemaps.write('.'))
 //         .pipe(gulp.dest('distrib'));
 // });
+
+//noImplicitAny: true,
+// declaration: true,
+
+gulp.task("build_ES5", function() {
+    return gulp.src([
+            "src/**/*.ts",
+            "src/**/*.js",
+            "Speech.Browser.Sdk.ts"],
+            {base: '.'})
+        .pipe(sourcemaps.init())
+        .pipe(ts({
+            target: "ES5",
+            lib: [ "ES2015", "dom" ],
+            removeComments: false,
+            allowJs: true,
+            outDir: 'distrib'
+        }))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('distrib'));
+});
 
 gulp.task("build", gulp.series("build_ES5"));
 
