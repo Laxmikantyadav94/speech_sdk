@@ -1,6 +1,6 @@
 {
   "name": "speech-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Smartek21 Speech SDK for browsers",
   "main": "distrib/Speech.Browser.Sdk.js",
   "types": "distrib/speech.browser.sdk.d.ts",
