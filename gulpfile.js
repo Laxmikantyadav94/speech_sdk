@@ -58,19 +58,30 @@ gulp.task("build", gulp.series("build_ES5"));
 gulp.task("bundle", gulp.series("build_ES5", function () {
     return gulp.src('samples/browser/sample_app.js')
     .pipe(webpack({
-        output: {filename: 'speech.sdk.bundle.js'}, 
+        output: {filename: 'deepspeech.sdk.bundle.js'}, 
         devtool: 'source-map',
         module:  {
             rules: [{
-                   enforce: 'pre',
                    test: /\.js$/,
-                   loader: "source-map-loader"
+                   use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react",
+                            "@babel/preset-typescript"
+                        ],
+                        plugins: [
+                            "@babel/plugin-proposal-class-properties",
+                            "@babel/plugin-proposal-object-rest-spread"
+                      ]
+                    }
+                  }
             }]
         }
     }))
     .pipe(gulp.dest('distrib'));
 }));
-
 
 // We don't want to release anything without a successful build. So build task is dependency for these tasks.
 gulp.task('patchRelease', gulp.series('build', function() { return BumpVersionTagAndCommit('patch'); }))
