@@ -14,15 +14,25 @@ DeepSpeech sdk for browser .
 3. Uses 
 
 let obj = new SDK.DeepSpeech();
+
     await obj.init();
+
     try{
+
           obj.recordAudio();
+
           setTimeout( async function(){
+
               let text= await obj.stopAudio();
+
               console.log("stop Audio resolved",text)
+
           }, 5000);
+
       }catch(err){
+
           console.log(err)
+          
       } 
 
 # In a Browser, using Webpack
