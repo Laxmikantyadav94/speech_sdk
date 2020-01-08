@@ -46,14 +46,7 @@
     "webpack-stream": "^4.0.0"
   },
   "scripts": {
-    "prepare": "npm install && gulp build",
-    "prepublishOnly": "npm install && gulp build",
-    "build": "npm install && gulp build",
-    "bundle": "npm install && gulp bundle",
-    "patchRelease": "npm install && gulp patchRelease",
-    "featureRelease": "npm install && gulp featureRelease",
-    "majorRelease": "npm install && gulp majorRelease",
-    "preRelease": "npm install && gulp preRelease"
+    "prepare": "npm install && gulp build"
   },
   "dependencies": {
     "socket.io-client": "2.3.0"
