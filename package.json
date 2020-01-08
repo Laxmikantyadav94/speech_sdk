@@ -46,7 +46,6 @@
     "webpack-stream": "^4.0.0"
   },
   "scripts": {
-    "preinstall": "npm install && gulp build",
     "install": "npm install && gulp build",
     "prepublishOnly": "npm install && gulp build",
     "build": "npm install && gulp build",
