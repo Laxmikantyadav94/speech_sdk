@@ -1,7 +1,6 @@
 import * as io from "socket.io-client";
 import * as ss from "../js/socket.io-stream";
-
-declare var Recorder:any;
+import Recorder from "./recorder";
 
 export class DeepSpeech {
     protected socket: any;
@@ -12,10 +11,9 @@ export class DeepSpeech {
     public async init(): Promise<any> {
         return new Promise(async (resolve: (value?: {} | PromiseLike<{}> | undefined) => void, reject: (reason?: any) => void) => {
             try {
-                await this.loadRecorderJS();
                 this.socket = io.connect("http://192.168.50.86:3000");
                 this.context = new AudioContext();
-                this.stream = await this.getMedia();
+                this.stream = await this.getMediaStream();
                 if (this.context.state == "suspended") {
                     await this.resumeAudioContext();
                 }
@@ -23,6 +21,7 @@ export class DeepSpeech {
                 this.recorder = new Recorder(input, {
                     numChannels: 1,
                   });
+                console.log("recorder....",this.recorder);
                 resolve();
             } catch (err) {
                 reject(err);
@@ -59,9 +58,13 @@ export class DeepSpeech {
           });
     }
 
-    private async getMedia(): Promise<any> {
+    private async getMediaStream(): Promise<any> {
         let stream = null;
-        const constraints = { audio: true };
+        const constraints = { 
+            audio: true,
+            echoCancellation: true,
+            noiseSuppression: true
+         };
         try {
             stream = await navigator.mediaDevices.getUserMedia(constraints);
             return stream;
@@ -69,29 +72,6 @@ export class DeepSpeech {
             throw err;
         }
     }
-
-    private loadRecorderJS():Promise<any>{
-     return new Promise((resolve, reject) => {
-       try {
-         this.loadScript('https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js', () => {
-        //    console.log('recorderJS loaded');
-           resolve();
-         });
-       } catch (err) {
-         reject(err);
-       }
-     });
-   }
-
-   private loadScript(url, execFn): void {
-     const script = document.createElement('script');
-     script.type = 'text/javascript';
-     script.src = url;
-     if (execFn) {
-       script.onload = execFn;
-     }
-     document.getElementsByTagName('head')[0].appendChild(script);
-   }
 
     private resumeAudioContext():Promise<any> {
         return new Promise((resolve, reject) => {
