@@ -9,20 +9,30 @@ DeepSpeech sdk for browser .
 
 2. Add import statement 
 
-    import * as  SDK   from 'speech-sdk'
+    import * as  speechSDK   from 'speech-sdk'
 
 3. Uses 
 
-let obj = new SDK.DeepSpeech();
+    let obj = new speechSDK.DeepSpeech();
+
     await obj.init();
+
     try{
+
           obj.recordAudio();
+
           setTimeout( async function(){
+
               let text= await obj.stopAudio();
+
               console.log("stop Audio resolved",text)
+
           }, 5000);
+
       }catch(err){
+
           console.log(err)
+
       } 
 
 # In a Browser, using Webpack
@@ -30,4 +40,35 @@ let obj = new SDK.DeepSpeech();
 1.  run "npm run bundle" this will generate a bundle file .
 2.  Add the generated bundle to your html page:
     <script src="../../distrib/speech.sdk.bundle.js"></script>
+3. uses -
+
+    var  obj = window.speechSDK.DeepSpeech();
+
+    try{
+        obj.init().then(function () {
+
+                // console.log("deepspeech socket initilized");
+
+                obj.recordAudio();
+
+                setTimeout( async function(){
+
+                    obj.stopAudio().then(function (text) {
+                        console.log("stop Audio resolved",text)
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+
+                }, 5000);
+
+            }).catch(function (err) {
+                console.log(err);
+            })      
+         
+      }catch(err){
+
+          console.log(err)
+
+      } 
+
 
