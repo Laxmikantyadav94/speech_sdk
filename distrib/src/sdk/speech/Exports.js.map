@@ -1,0 +1,1 @@
+{"version":3,"sources":["../src/sdk/speech/Exports.ts"],"names":[],"mappings":";AACA,6CAA6C;;;;;AAE7C,kCAA6B;AAC7B,gCAA2B","file":"Exports.js","sourcesContent":["\n// IMPORTANT - Dont publish internal modules.\n\nexport * from \"./DeepSpeech\";\nexport * from \"./recorder\";\n"]}

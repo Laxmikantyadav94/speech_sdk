@@ -1,0 +1,1 @@
+{"version":3,"sources":["../Speech.Browser.Sdk.ts"],"names":[],"mappings":";;;;;AAAA,8CAAwC","file":"Speech.Browser.Sdk.js","sourcesContent":["export * from \"./src/sdk/speech/Exports\""]}
