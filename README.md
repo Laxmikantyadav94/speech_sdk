@@ -5,7 +5,7 @@ DeepSpeech sdk for browser .
 
 1. Add following the the package.json dependencies 
 
-   "speech-sdk": "git+ssh://smartek21India@vs-ssh.visualstudio.com:v3/smartek21India/IntelligentMachines/speech-sdk"
+   "speech-sdk": "url to repo"
 
 2. Add import statement 
 

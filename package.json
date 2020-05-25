@@ -5,7 +5,6 @@
   "main": "distrib/Speech.Browser.Sdk.js",
   "types": "distrib/speech.browser.sdk.d.ts",
   "keywords": [
-    "smartek21",
     "speech",
     "sdk",
     "javascript",
@@ -18,9 +17,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://smartek21india.visualstudio.com/IntelligentMachines/_git/speech-sdk"
+    "url": "https://github.com/Laxmikantyadav94/speech_sdk"
   },
-  "author": "smartek21",
+  "author": "Laxmikant",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "7.7.7",
